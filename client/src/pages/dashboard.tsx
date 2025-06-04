@@ -12,7 +12,7 @@ export default function Dashboard() {
   const { data: channelsWithTokens, isLoading: channelsLoading, error: channelsError } = useChannelsWithTokens();
   const { data: commonTokens, isLoading: commonLoading, error: commonError } = useCommonTokens(2);
   const [commonSearchQuery, setCommonSearchQuery] = useState("");
-  const [commonSortBy, setCommonSortBy] = useState("frequency");
+  const [commonSortBy, setCommonSortBy] = useState("growth");
   const [commonMinChannels, setCommonMinChannels] = useState("2");
   const { data: favoriteTokens, isLoading: favoriteLoading, error: favoriteError } = useFavoriteTokens();
   const [favoriteSearchQuery, setFavoriteSearchQuery] = useState("");
@@ -92,6 +92,8 @@ export default function Dashboard() {
         return parseFloat(b.ath || "0") - parseFloat(a.ath || "0");
       case "date":
         return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+      case "growth":
+        return parseFloat(b.growthPercentage || "0") - parseFloat(a.growthPercentage || "0");
       default:
         return 0;
     }
@@ -105,6 +107,8 @@ export default function Dashboard() {
         return parseFloat(b.ath || "0") - parseFloat(a.ath || "0");
       case "date":
         return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+      case "growth":
+        return parseFloat(b.growthPercentage || "0") - parseFloat(a.growthPercentage || "0");
       default:
         return 0;
     }
@@ -227,6 +231,7 @@ export default function Dashboard() {
                     <option value="marketcap">Sort by Market Cap</option>
                     <option value="ath">Sort by ATH</option>
                     <option value="date">Sort by Date</option>
+                    <option value="growth">Sort by Growth</option>
                   </select>
                   
                   <select

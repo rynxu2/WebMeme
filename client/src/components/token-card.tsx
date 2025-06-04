@@ -6,6 +6,7 @@ import { queryClient } from "@/lib/queryClient";
 import { useMutation } from "@tanstack/react-query";
 import { ExternalLink, Link2, MessageCircle, Copy, Check, Trash2, Star } from "lucide-react";
 import type { Token, Channel } from "@shared/schema";
+import GrowthPercentage from "@/components/growth-percentage";
 
 interface TokenCardProps {
   token: Token;
@@ -179,6 +180,7 @@ export default function TokenCard({ token, showChannels = false, channels = [], 
             <Badge variant="secondary" className="text-xs">
               {token.name}
             </Badge>
+            <GrowthPercentage value={parseInt(token.growthPercentage || '0')}/>
           </div>
           <div className="text-xs text-muted-foreground mt-1 font-mono">
             {formatAddress(token.address)}

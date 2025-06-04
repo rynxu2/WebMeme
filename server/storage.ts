@@ -114,7 +114,8 @@ export class MongoStorage implements IStorage {
       updatedAt: doc.updatedAt ? new Date(doc.updatedAt) : null,
       channel: doc.channel,
       messageId: doc.messageId,
-      isFavorite: doc.isFavorite || 0
+      isFavorite: doc.isFavorite || 0,
+      growthPercentage: doc.growthPercentage ? doc.growthPercentage.toString() : '0'
     };
   }
 

@@ -1,3 +1,4 @@
+import { float } from "drizzle-orm/mysql-core";
 import { pgTable, text, serial, integer, timestamp, decimal, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -24,6 +25,7 @@ export const tokens = pgTable("tokens", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
   isFavorite: boolean("is_favorite").notNull().default(false),
+  growthPercentage: decimal("growth_percentage", { precision: 5, scale: 2 }).default("0.00"),
 });
 
 export const channelTokens = pgTable("channel_tokens", {

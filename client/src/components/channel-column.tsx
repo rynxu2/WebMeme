@@ -11,7 +11,7 @@ interface ChannelColumnProps {
 
 export default function ChannelColumn({ channel }: ChannelColumnProps) {
   const [searchContract, setSearchContract] = useState("");
-  const [sortBy, setSortBy] = useState("marketcap");
+  const [sortBy, setSortBy] = useState("growth");
   
   const { data: searchResults, isLoading: isSearching } = useSearchTokens(searchContract, channel.name);
   
@@ -27,6 +27,8 @@ export default function ChannelColumn({ channel }: ChannelColumnProps) {
         return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
       case "recent":
         return new Date(b.updatedAt || 0).getTime() - new Date(a.updatedAt || 0).getTime();
+      case "growth":
+        return parseFloat(b.growthPercentage || "0") - parseFloat(a.growthPercentage || "0");
       default:
         return 0;
     }
@@ -81,6 +83,7 @@ export default function ChannelColumn({ channel }: ChannelColumnProps) {
           <option value="ath">Sort by ATH</option>
           <option value="date">Sort by Date</option>
           <option value="recent">Sort by Recent</option>
+          <option value="growth">Sort by Growth</option>
         </select>
       </div>
       
