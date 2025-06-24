@@ -18,7 +18,6 @@ interface TokenCardProps {
 
 export default function TokenCard({ token, showChannels = false, channels = [], channel, messageId }: TokenCardProps) {
   const [copied, setCopied] = useState(false);
-  // Remove local state and use token.isFavorite directly
   const { toast } = useToast();
 
   const deleteTokenMutation = useMutation({
@@ -64,7 +63,6 @@ export default function TokenCard({ token, showChannels = false, channels = [], 
         title: token.isFavorite ? "Removed from Favorites" : "Added to Favorites",
         description: token.isFavorite ? "Token has been removed from favorites" : "Token has been added to favorites",
       });
-      // Invalidate all queries that might contain this token
       queryClient.invalidateQueries({ queryKey: ["/api/tokens/favorites"] });
       queryClient.invalidateQueries({ queryKey: ["/api/channels/with-tokens"] });
       queryClient.invalidateQueries({ queryKey: ["/api/tokens/common"] });
@@ -98,7 +96,7 @@ export default function TokenCard({ token, showChannels = false, channels = [], 
 
   const handleOpenMevxWeb = () => {
     if (token.address) {
-      const url = `https://mevx.io/solana/${token.address}`;
+      const url = `https://alpha.mevx.io/solana/${token.address}`;
       window.open(url, '_blank');
     } else {
       toast({

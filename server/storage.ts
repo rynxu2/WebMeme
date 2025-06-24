@@ -119,7 +119,6 @@ export class MongoStorage implements IStorage {
     };
   }
 
-  // Get unique channels from token data
   private async getUniqueChannels(): Promise<string[]> {
     const channels = await this.tokensCollection.distinct("channel");
     return channels.filter(Boolean);
@@ -349,35 +348,6 @@ export class MongoStorage implements IStorage {
 
     return channelsWithTokens;
   }
-
-  // async getTokensFavorite(): Promise<Token[]> {
-  //   const docs = await this.tokensCollection.find({ isFavorite: true }).toArray();
-
-  //   // Gộp theo address
-  //   const mergedTokensMap = new Map<string, any>();
-
-  //   for (const doc of docs) {
-  //     const address = doc.contract || doc.contract;
-  //     if (!mergedTokensMap.has(address)) {
-  //       // Clone object để tránh ghi đè
-  //       mergedTokensMap.set(address, {
-  //         ...doc,
-  //         channels: [doc.channel],
-  //       });
-  //     } else {
-  //       const existing = mergedTokensMap.get(address);
-  //       // Thêm channel nếu chưa có
-  //       if (!existing.channels.includes(doc.channel)) {
-  //         existing.channels.push(doc.channel);
-  //       }
-  //     }
-  //   }
-
-  //   // Trả về danh sách tokens sau khi gộp và map thành Token[]
-  //   const mergedTokens = Array.from(mergedTokensMap.values());
-  //   console.log("Merged favorite tokens:", mergedTokens[0]);
-  //   return mergedTokens.map(doc => this.mapTokenDocument(doc));
-  // }
 
   async getFavoriteTokensGrouped(minChannels: number = 1): Promise<TokenWithChannels[]> {
     const pipeline = [

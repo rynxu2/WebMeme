@@ -42,9 +42,9 @@ export default function Dashboard() {
     
     switch (tabValue) {
       case "tab1":
-        return channelsWithTokens.slice(0, 3);
+        return channelsWithTokens.slice(0, 4);
       case "tab2":
-        return channelsWithTokens.slice(3, 7);
+        return channelsWithTokens.slice(4, 8);
       default:
         return [];
     }
@@ -53,7 +53,7 @@ export default function Dashboard() {
   const getGridColumns = (tabValue: string) => {
     switch (tabValue) {
       case "tab1":
-        return "grid-cols-1 lg:grid-cols-3";
+        return "grid-cols-1 md:grid-cols-2 xl:grid-cols-4";
       case "tab2":
         return "grid-cols-1 md:grid-cols-2 xl:grid-cols-4";
       default:
@@ -123,7 +123,7 @@ export default function Dashboard() {
           <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="tab1" className="flex items-center gap-2">
               <Layers className="h-4 w-4" />
-              3 Channels
+              4 Channels
             </TabsTrigger>
             <TabsTrigger value="tab2" className="flex items-center gap-2">
               <LayoutGrid className="h-4 w-4" />
@@ -142,7 +142,7 @@ export default function Dashboard() {
           <TabsContent value="tab1" className="space-y-6">
             <div className={`grid gap-6 ${getGridColumns("tab1")}`}>
               {channelsLoading ? (
-                Array.from({ length: 3 }).map((_, i) => (
+                Array.from({ length: 4 }).map((_, i) => (
                   <div key={i} className="bg-card rounded-lg shadow-sm border border-border">
                     <div className="p-4 border-b border-border bg-muted/50 rounded-t-lg">
                       <Skeleton className="h-6 w-32 mb-3" />

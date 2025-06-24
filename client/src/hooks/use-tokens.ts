@@ -5,7 +5,7 @@ import axios from "axios";
 export function useChannelsWithTokens() {
   return useQuery<ChannelWithTokens[]>({
     queryKey: ["/api/channels/with-tokens"],
-    staleTime: 30000, // Consider data fresh for 30 seconds
+    staleTime: 30000,
     refetchInterval: 10000, // Refetch every 10 seconds
     refetchOnWindowFocus: true,
     refetchOnMount: true,
